@@ -11,9 +11,17 @@ endif()
 
 project(Thrust NONE)
 
+# Determine whether Thrust is the top-level project or included into
+# another project via add_subdirectory()
+if ("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_CURRENT_LIST_DIR}")
+  set(THRUST_TOPLEVEL_PROJECT ON)
+else()
+  set(THRUST_TOPLEVEL_PROJECT OFF)
+endif()
+
 # Support adding Thrust to a parent project via add_subdirectory.
 # See examples/cmake/add_subdir/CMakeLists.txt for details.
-if (NOT "${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_CURRENT_LIST_DIR}")
+if (NOT THRUST_TOPLEVEL_PROJECT)
   include(cmake/ThrustAddSubdir.cmake)
   return()
 endif()
