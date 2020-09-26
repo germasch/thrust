@@ -1,10 +1,3 @@
-# Support adding Thrust to a parent project via add_subdirectory.
-# See examples/cmake/add_subdir/CMakeLists.txt for details.
-if (NOT "${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_CURRENT_LIST_DIR}")
-  include(cmake/ThrustAddSubdir.cmake)
-  return()
-endif()
-
 # 3.15 is the minimum.
 # 3.17 for nvc++/Feta
 # 3.18 for C++17 + CUDA
@@ -17,6 +10,13 @@ if (CMAKE_VERSION VERSION_GREATER_EQUAL 3.18)
 endif()
 
 project(Thrust NONE)
+
+# Support adding Thrust to a parent project via add_subdirectory.
+# See examples/cmake/add_subdir/CMakeLists.txt for details.
+if (NOT "${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_CURRENT_LIST_DIR}")
+  include(cmake/ThrustAddSubdir.cmake)
+  return()
+endif()
 
 include(cmake/AppendOptionIfAvailable.cmake)
 
