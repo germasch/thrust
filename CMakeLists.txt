@@ -19,6 +19,11 @@ else()
   set(THRUST_TOPLEVEL_PROJECT OFF)
 endif()
 
+option(THRUST_INSTALL "Enable installation of Thrust" ${THRUST_TOPLEVEL_PROJECT})
+if (THRUST_INSTALL)
+  include(cmake/ThrustInstallRules.cmake)
+endif()
+
 # Support adding Thrust to a parent project via add_subdirectory.
 # See examples/cmake/add_subdir/CMakeLists.txt for details.
 if (NOT THRUST_TOPLEVEL_PROJECT)
@@ -31,7 +36,6 @@ include(cmake/AppendOptionIfAvailable.cmake)
 include(cmake/ThrustBuildCompilerTargets.cmake)
 include(cmake/ThrustBuildTargetList.cmake)
 include(cmake/ThrustMultiConfig.cmake)
-include(cmake/ThrustInstallRules.cmake)
 include(cmake/ThrustUtilities.cmake)
 
 option(THRUST_ENABLE_HEADER_TESTING "Test that all public headers compile." "ON")
